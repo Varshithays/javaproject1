@@ -1,50 +1,42 @@
 package com.javavarshitha;
-import java.text.NumberFormat;
-import java.util.Scanner;
 
-public class Main {
+import java.util.Random;
 
-    public static void main(String[] args){
-        final byte monthsInYear =12;
-        final byte percent = 100;
+public class Main{
 
-        int principal = 0;
-        float monthlyInterest =0;
-        int numberOfPayments =0;
-
-        Scanner scanner = new Scanner(System.in);
-
-        while(true){
-            System.out.print("Principal: ");
-             principal = scanner.nextInt();
-            if(principal >= 1000 && principal <= 1_000_000)
-                break;
-            System.out.println("Enter the value between 1000 and 1000000");
-        }
-        while(true){
-            System.out.println("Annual Interest Rate: ");
-            float annualInterest = scanner.nextFloat();
-            if(annualInterest>= 1 && annualInterest<=30){
-                 monthlyInterest=annualInterest/percent/monthsInYear;
-                 break;
-            }
-            System.out.println("Enter a value between 1 and 30");
-        }
-        while(true){
-            System.out.println("Period(years): " );
-            byte years = scanner.nextByte();
-            if(years>=1 && years <= 30){
-                numberOfPayments = years * monthsInYear;
-                break;
-            }
-            System.out.println("Enter value between 1 and 30");
-        }
-        double mortgage = principal*
-                (monthlyInterest*Math.pow(1+monthlyInterest,numberOfPayments)/(Math.pow(1+monthlyInterest,numberOfPayments)-1));
-        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("Mortgage: " + mortgageFormatted);
-
-
-        }
-
+    public static void main(String[] args) {
+	// write your code here
+        int length = 10;
+        System.out.println(generate_password(length));
     }
+    static char[] generate_password(int len)
+    {
+        System.out.println("Generating password using random(): ");
+        System.out.println("Your new password is : ");
+
+
+        String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String Small_chars = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+        String symbols = "!@#$%^&*_=+-/.?<>)";
+
+        String values = Capital_chars + Small_chars +
+                numbers + symbols;
+
+        // Using random method
+        Random rndm_method = new Random();
+
+        char[] password = new char[len];
+
+        for (int i = 0; i < len; i++)
+        {
+            // Use of charAt() method : to get character value
+            // Use of nextInt() as it is scanning the value as int
+            password[i] =
+                    values.charAt(rndm_method.nextInt(values.length()));
+
+        }
+        return password;
+    }
+    }
+
